@@ -1,0 +1,38 @@
+var menus = [
+  {
+    action: "home",
+    title: "首页",
+    path:"/index",
+    items: [{ title: "统计", path: "/dashboard" }]
+  },
+  {
+    action: "apps",
+    title: "数据加密",
+    path:"/encryption",
+    items: [
+      { title: "数据加密服务", path: "/encservice" },
+      { title: "数据加密存储", path: "/encstore" },
+    ]
+  },
+  {
+    action: "people",
+    title: "算法维护",
+    path:"/algorithm",
+    items: [
+      { title: "算法管理", path: "/algomanage" },
+    ]
+  },
+  {
+    action: "settings",
+    title: "集群资源管理",
+    path:"/sysmanage",
+    items: [
+      { title: "master", path: "/master" },
+      { title: "slave1", path: "/slave1" },
+      { title: "slave2", path: "/slave2" },
+      { title: "slave3", path: "/slave3" },
+    ]
+  }
+]
+
+export default menus;
