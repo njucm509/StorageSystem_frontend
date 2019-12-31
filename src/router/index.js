@@ -13,7 +13,8 @@ function route(path, file, name, children) {
   }
 }
 
-export default new Router({
+const router = new Router({
+  mode: 'history',
   routes: [
     route("/login", '/Login', "Login"),
     {
@@ -37,3 +38,19 @@ export default new Router({
     route("/404", "/404", "404")
   ]
 })
+
+router.beforeEach((to, from, next) => {
+  if (to.path == "/login") {
+    next();
+  } else {
+    if (sessionStorage.getItem("user")) {
+      next()
+    } else {
+      next({
+        path: "/login"
+      })
+    }
+  }
+})
+
+export default router

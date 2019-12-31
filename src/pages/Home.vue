@@ -8,7 +8,7 @@
           <v-list-tile avatar>
             <v-list-tile-avatar> <img src="../assets/logo.png"> </v-list-tile-avatar>
             <v-list-tile-content>
-              <v-list-tile-title>frontend</v-list-tile-title>
+              <v-list-tile-title>{{user.account}}</v-list-tile-title>
             </v-list-tile-content>
           </v-list-tile>
         </v-list>
@@ -75,6 +75,7 @@
   export default {
     data() {
       return {
+        user: {},
         dark: false,
         drawer: true,
         miniVariant: false,
@@ -109,6 +110,8 @@
       console.log(this.menuMap)
     },
     mounted() {
+      this.user = JSON.parse(sessionStorage.getItem('user'))
+      console.log(this.user)
     }
   }
 </script>
