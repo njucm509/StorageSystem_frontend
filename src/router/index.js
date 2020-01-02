@@ -25,6 +25,7 @@ const router = new Router({
         route("/index/dashboard", "/Dashboard", "Dashboard"),
         route("/encryption/encservice", '/dataencryption/EncryptionService', "EncService"),
         route("/encryption/encstore", '/dataencryption/EncryptionStore', "EncStore"),
+        route("/encryption/encrecord", '/dataencryption/EncryptionRecord', "EncRecord"),
         route("/sysmanage/master", '/sysmanage/node/master', "Master"),
         route("/sysmanage/master2", '/sysmanage/node/master2', "Master2"),
         route("/sysmanage/slave1", '/sysmanage/node/slave1', "Slave1"),
@@ -32,7 +33,7 @@ const router = new Router({
         route("/sysmanage/slave3", '/sysmanage/node/slave3', "Slave3"),
         route("/algorithm/algomanage", '/algorithm/AlgoManage', "AlgoManage"),
         route("/user/info", '/usermanage/UserInfo', "UserInfo"),
-        route("/user/list", '/usermanage/UserList', "UserList")
+        route("/user/list", '/usermanage/UserList', "UserList"),
       ]
     },
     route("/404", "/404", "404")

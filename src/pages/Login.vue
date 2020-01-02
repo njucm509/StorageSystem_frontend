@@ -68,14 +68,10 @@
             // })
             requestLogin(loginParams).then(res => {
               this.logining = true;
-              console.log(res)
               let data = res.data
               let code = res.status
               let msg = data.msg
               let user = data.user
-              console.log(data)
-              console.log(msg)
-              console.log(code)
               if (code != 200) {
                 this.$message({
                   message: msg,

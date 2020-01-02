@@ -1,11 +1,11 @@
 <template>
 	<div id="base">
 		<el-input v-model="content" :disabled="true" /><br />
-		<el-select v-model="curEncryption" placeholder="请选择加密方式">
+		<el-select v-model="curEncryption" placeholder="请选择加密方式" :disabled="check">
 			<el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
 			</el-option>
 		</el-select>
-		<el-select v-model="curDefault" placeholder="是否加密">
+		<el-select v-model="curDefault" placeholder="是否加密" :disabled="check">
 			<el-option v-for="item in optionDefault" :key="item.value" :label="item.label" :value="item.value">
 			</el-option>
 		</el-select>
@@ -45,10 +45,10 @@
 					}
 				],
 				curEncryption: this.encryption,
-				curDefault: this.default
+				curDefault: this.defaultEnc
 			}
 		},
-		props: ['content', 'encryption', 'default'],
+    props: ['content', 'encryption', 'defaultEnc', 'check'],
 		watch: {
 			'encryption': function(newVal, oldVal) {
 				this.curEncryption = newVal;
@@ -56,11 +56,11 @@
 			'curEncryption': function(newVal, oldVal) {
 				this.$emit("update:encryption", newVal);
 			},
-			'default': function(newVal, oldVal) {
+			'defaultEnc': function(newVal, oldVal) {
 				this.curDefault = newVal;
 			},
 			'curDefault': function(newVal, oldVal) {
-				this.$emit("update:default", newVal);
+				this.$emit("update:defaultEnc", newVal);
 			}
 		}
 	}

@@ -12,6 +12,7 @@ var menus = [
     items: [
       {title: "数据加密服务", path: "/encservice"},
       {title: "数据加密存储", path: "/encstore"},
+      {title: "数据加密记录", path: "/encrecord"},
     ]
   },
   {

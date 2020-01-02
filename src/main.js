@@ -14,6 +14,7 @@ import echarts from 'echarts'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.min'
 import $ from 'jquery'
+import uploader from 'vue-simple-uploader'
 
 Vue.config.productionTip = false
 
@@ -21,6 +22,7 @@ Vue.config.productionTip = false
 Vue.use(Vuetify, { theme: config.theme})
 
 Vue.use(ElementUI)
+Vue.use(uploader)
 
 Vue.prototype.$echarts = echarts
 

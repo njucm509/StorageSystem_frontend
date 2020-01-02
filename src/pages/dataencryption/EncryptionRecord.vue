@@ -1,7 +1,6 @@
 <template>
   <v-card>
     <v-card-title>
-      <v-btn color="primary" @click="add">新增用户</v-btn>
       <v-spacer/>
       <v-flex xs3>
         <v-text-field label="输入关键字搜索" v-model.lazy="search" append-icon="search" hide-details></v-text-field>
@@ -47,12 +46,10 @@
 </template>
 
 <script>
-  import UserItem from "./UserItem";
 
   export default {
-    components: {
-      'user-item': UserItem
-    },
+    name: 'EncryptionRecord',
+    components: {},
     data() {
       return {
         pagination: {},
@@ -111,11 +108,6 @@
           console.log(err)
         });
       },
-      add() {
-        this.show = true;
-        this.isEdit = false;
-        this.oldItem = null;
-      },
       edit(oldItem) {
         this.isEdit = true;
         this.oldItem = oldItem;
@@ -148,5 +140,6 @@
   }
 </script>
 
-<style>
+<style scoped>
+
 </style>
