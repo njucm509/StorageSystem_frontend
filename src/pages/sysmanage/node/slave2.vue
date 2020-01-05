@@ -44,10 +44,10 @@
             }
           ]
         };
-        setInterval(function () {
-          option.series[0].data[0].value = (Math.random() * 100).toFixed(2) - 0;
-          myChart.setOption(option, true);
-        },2000);
+        // setInterval(function () {
+        //   option.series[0].data[0].value = (Math.random() * 100).toFixed(2) - 0;
+        //   myChart.setOption(option, true);
+        // },2000);
         cpu.setOption(option)
       },
       //佚名圆环：使用中（已压缩）和可用(MB)

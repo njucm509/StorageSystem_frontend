@@ -1,16 +1,8 @@
 <template>
   <v-form v-model="valid" ref="myForm">
-    <v-text-field v-model="item.name" label="真实姓名：" required :rules="nameRules"/>
-    <v-text-field v-model="item.account" label="账号：" required :rules="accountRules"/>
-    <v-text-field v-model="item.pwd" label="密码：" required :rules="pwdRules"/>
-<!--    <v-layout row>-->
-<!--      <v-flex xs3>-->
-<!--        <span style="font-size: 16px; color: #444">头像：</span>-->
-<!--      </v-flex>-->
-<!--      <v-flex>-->
-<!--        <v-upload v-model="user.image" url="/upload/image" :multiple="false" :pic-width="250" :pic-height="90"/>-->
-<!--      </v-flex>-->
-<!--    </v-layout>-->
+    <v-text-field v-model="item.name" label="算法名称：" required :rules="nameRules"/>
+    <v-switch v-model="item.status" :label="item.status==1?'启用':'禁用'"/>
+    <v-checkbox v-model="item.canDelete" v-if="item.canDelete==1" label="是否能删除："/>
     <v-layout class="my-4" row>
       <v-spacer/>
       <v-btn :disabled="!valid" @click="submit" color="primary">提交</v-btn>
@@ -21,7 +13,7 @@
 
 <script>
   export default {
-    name: "UserItem",
+    name: "AlgoItem",
     props: {
       oldItem: {
         type: Object
@@ -33,23 +25,13 @@
         item: {
           id: '',
           name: '',
-          account: '',
-          pwd: '',
+          status: 1,
+          canDelete: 1,
           createAt: '',
           updateAt: '',
         },
         nameRules: [
           v => !!v || "名称不能为空",
-        ],
-        accountRules: [
-          v => !!v || "账号不能为空",
-          // v => /^[a-zA-Z]{1}$/.test(v) || "品牌字母只能是1个字母"
-          v => v.length > 4 || "账号至少5位"
-        ],
-        pwdRules: [
-          v => !!v || "密码不能为空",
-          // v => /^[a-zA-Z]{1}$/.test(v) || "品牌字母只能是1个字母"
-          v => v.length > 4 || "密码至少5位"
         ]
       };
     },
@@ -61,8 +43,8 @@
         this.item = {
           id: '',
           name: '',
-          account: '',
-          pwd: '',
+          status: 1,
+          canDelete: 1,
           createAt: '',
           updateAt: '',
         }
@@ -79,8 +61,8 @@
             this.item = {
               id: '',
               name: '',
-              account: '',
-              password: '',
+              status: 1,
+              canDelete: 1,
               createAt: '',
               updateAt: '',
             }

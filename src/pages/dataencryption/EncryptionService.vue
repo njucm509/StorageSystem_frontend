@@ -65,7 +65,8 @@
           color="lighten-1"
           height="500px"
         >
-          <my-checkbox v-for="(info,index) in fileHeaderInfo" :key="index" :encryption.sync="info.encryption" :content="info.content"
+          <my-checkbox v-for="(info,index) in fileHeaderInfo" :key="index" :encryption.sync="info.encryption"
+                       :content="info.content"
                        :defaultEnc.sync="info.defaultEnc" :check="false"></my-checkbox>
         </v-card>
         <v-btn
@@ -113,9 +114,22 @@
       <v-stepper-content step="4">
         <v-card
           class="mb-5"
-          color="grey lighten-1"
+          color="lighten-1"
           height="500px"
-        ></v-card>
+        >
+          <p v-if="!finalShow">数据正在加密中...</p>
+          <v-data-table v-if="finalShow" :headers="encResHeader" :items="encResItems"
+                        class="elevation-1">
+            <template slot="items" slot-scope="props">
+              <td class="text-xs-center" v-for="(i,index) in props.item" :key="index">{{ i | subEncStr }}</td>
+              <td class="justify-center layout px-0">
+                <v-btn icon @click="detail(props.item)">
+                  <i class="el-icon-more"/>
+                </v-btn>
+              </td>
+            </template>
+          </v-data-table>
+        </v-card>
       </v-stepper-content>
     </v-stepper-items>
   </v-stepper>
@@ -179,7 +193,20 @@
             sortable: false,
             value: 'defaultEnc',
           }
-        ]
+        ],
+        finalShow: false,
+        encResHeader: [],
+        encResItems: [],
+      }
+    },
+    filters: {
+      "subEncStr": function (value) {
+        console.log(value);
+        if (value.length > 9) {
+          return value.substring(0, 10) + "...";
+        } else {
+          return value;
+        }
       }
     },
     methods: {
@@ -208,6 +235,10 @@
         }
       },
       second() {
+        if (this.filename == null || this.filename == '') {
+          alert('请选择加密的文件!');
+          return;
+        }
         this.e1 = 2;
         this.$http.post('/file/header', {
           filename: this.filename
@@ -218,13 +249,40 @@
       },
       final() {
         console.log(this.fileHeaderInfo)
-        this.e1 = 3;
+        this.e1 = 4;
         this.$http.post('/encrypt', {
           list: this.fileHeaderInfo,
-          filename: this.filename
+          filename: this.filename,
+          user: JSON.parse(sessionStorage.getItem('user'))
         }).then(res => {
-          console.log(res);
+          let data = res.data
+          this.finalShow = true;
+          console.log(this.fileHeaderInfo);
+          console.log("data: ")
+          console.log(data)
+          for (let i = 0; i < data[0].length; i++) {
+            this.encResHeader.push({
+              text: data[0][i],
+              align: 'center',
+              sortable: false,
+              // value: data[0][i],
+            })
+          }
+          this.encResHeader.push({
+            text: '操作',
+            align: 'center',
+            sortable: false
+          })
+          // this.encResHeader = data[0]
+          for (let i = 1; i < data.length; i++) {
+            this.encResItems.push(data[i]);
+          }
+          console.log(this.encResItems);
+          console.log(this.encResHeader);
         });
+      },
+      detail(value) {
+        console.log(value)
       },
       test() {
       }

@@ -11,15 +11,15 @@
                   class="elevation-1">
       <template slot="items" slot-scope="props">
         <td class="text-xs-center">{{ props.item.id }}</td>
-        <td class="text-xs-center">{{ props.item.name }}</td>
-        <td class="text-xs-center">{{ props.item.account }}</td>
+        <td class="text-xs-center">{{ props.item.userId }}</td>
+        <td class="text-xs-center">{{ props.item.filename }}</td>
+        <td class="text-xs-center">{{ props.item.record }}</td>
         <td class="text-xs-center">{{ props.item.createAt }}</td>
-        <td class="text-xs-center">{{ props.item.updateAt }}</td>
         <td class="justify-center layout px-0">
-          <v-btn icon @click="edit(props.item)">
-            <i class="el-icon-edit"/>
-          </v-btn>
-          <v-btn icon @click="delete(props.item)">
+<!--          <v-btn icon @click="edit(props.item)">-->
+<!--            <i class="el-icon-edit"/>-->
+<!--          </v-btn>-->
+          <v-btn icon @click="deleteRecord(props.item)">
             <i class="el-icon-delete"/>
           </v-btn>
         </td>
@@ -38,7 +38,7 @@
         </v-toolbar>
         <!--对话框的内容，表单-->
         <v-card-text class="px-5" style="height:400px">
-          <user-item @close="closeWindow" :oldItem="oldItem" :isEdit="isEdit"/>
+<!--          <user-item @close="closeWindow" :oldItem="oldItem" :isEdit="isEdit"/>-->
         </v-card-text>
       </v-card>
     </v-dialog>
@@ -47,9 +47,13 @@
 
 <script>
 
+  // import UserItem from '../usermanage/UserItem'
+
   export default {
     name: 'EncryptionRecord',
-    components: {},
+    components: {
+      // 'user-item': UserItem
+    },
     data() {
       return {
         pagination: {},
@@ -64,25 +68,29 @@
           sortable: true,
           value: 'id',
         }, {
-          text: '姓名',
+          text: '用户编号',
           align: 'center',
-          sortable: true,
-          value: 'name',
+          sortable: false,
+          value: 'userId',
         }, {
-          text: '账号',
+          text: '加密的文件',
           align: 'center',
-          sortable: true,
-          value: 'account',
+          sortable: false,
+          value: 'filename',
+        }, {
+          text: '操作记录',
+          align: 'center',
+          sortable: false,
+          value: 'record',
         }, {
           text: '创建时间',
           align: 'center',
           sortable: true,
           value: 'createAt',
         }, {
-          text: '更新时间',
+          text: '操作',
           align: 'center',
-          sortable: true,
-          value: 'updateAt',
+          sortable: false
         },
         ],
         items: [],
@@ -91,7 +99,7 @@
     },
     methods: {
       getData() {
-        let url = "/user/page";
+        let url = "/encrecord/page";
         this.$http.get(url, {
           params: {
             key: this.search, // 搜索条件
@@ -113,7 +121,8 @@
         this.oldItem = oldItem;
         this.show = true;
       },
-      delete(oldItem) {
+      deleteRecord(value) {
+        console.log(value)
       },
       closeWindow() {
         this.getData();

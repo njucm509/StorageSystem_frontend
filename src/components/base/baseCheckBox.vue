@@ -26,8 +26,8 @@
 						label: 'aes加密'
 					},
 					{
-						value: 'des',
-						label: 'des加密'
+						value: 'md5',
+						label: 'md5加密'
 					},
 					{
 						value: 'ecc',
@@ -68,9 +68,9 @@
 
 <style>
 	#base{
-		position: relative;
+		/*position: relative;*/
 		width:150px;
-		top: 60px;
+		top: 0px;
 		margin:20px;
 		float: left;
 	}
