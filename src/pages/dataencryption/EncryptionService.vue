@@ -65,7 +65,9 @@
           color="lighten-1"
           height="500px"
         >
-          <my-checkbox v-for="(info,index) in fileHeaderInfo" :key="index" :encryption.sync="info.encryption"
+          <p v-if="!analyse">正在解析文件...</p>
+          <my-checkbox v-if="analyse" v-for="(info,index) in fileHeaderInfo" :key="index"
+                       :encryption.sync="info.encryption"
                        :content="info.content"
                        :defaultEnc.sync="info.defaultEnc" :check="false"></my-checkbox>
         </v-card>
@@ -88,6 +90,8 @@
           color="lighten-1"
           height="500px"
         >
+          <v-checkbox v-model="isStore" label="是否存储"/>
+          <v-divider/>
           <v-data-table :headers="headersInfo" :items="fileHeaderInfo"
                         class="elevation-1">
             <template slot="items" slot-scope="props">
@@ -163,7 +167,7 @@
           sortable: true,
           value: 'id',
         }, {
-          text: '姓名',
+          text: '文件名',
           align: 'center',
           sortable: true,
           value: 'filename',
@@ -174,6 +178,7 @@
         fileList: [],
         filename: '',
         fileHeaderInfo: [],
+        analyse: false,
         headersInfo: [
           {
             text: '列名',
@@ -197,7 +202,8 @@
         finalShow: false,
         encResHeader: [],
         encResItems: [],
-      }
+        isStore: false,
+      };
     },
     filters: {
       "subEncStr": function (value) {
@@ -245,6 +251,7 @@
         }).then(res => {
           console.log(res.data);
           this.fileHeaderInfo = res.data;
+          this.analyse = true;
         })
       },
       final() {

@@ -1,9 +1,10 @@
 <template>
   <v-card class="px-5">
     <v-form v-model="valid" ref="myForm">
+      <v-text-field v-model="item.account" label="账号：" disabled/>
       <v-text-field v-model="item.name" label="真实姓名：" required :rules="nameRules"/>
-      <v-text-field v-model="item.account" label="账号：" required :rules="accountRules"/>
       <v-text-field v-model="item.pwd" label="密码：" required :rules="pwdRules"/>
+      <v-switch v-model="item.role" :label="item.role==1?'管理员':'普通用户'" disabled/>
       <v-text-field v-model="item.createAt" label="创建时间：" disabled/>
       <v-text-field v-model="item.updateAt" label="上次更新时间：" disabled/>
 
@@ -35,6 +36,7 @@
           name: '',
           account: '',
           pwd: '',
+          role: '',
           createAt: '',
           updateAt: '',
         },
@@ -54,14 +56,19 @@
     },
     methods: {
       submit() {
-
+        console.log(this.item);
+        this.$http.post('/user/update', this.item).then(res => {
+          console.log(res)
+          sessionStorage.setItem('user', JSON.stringify(this.item));
+          this.item = JSON.parse(sessionStorage.getItem('user'));
+        })
       },
       clear() {
         this.item = {
           id: '',
           name: '',
           account: '',
-          password: '',
+          pwd: '',
           createAt: '',
           updateAt: '',
         }

@@ -16,9 +16,9 @@
         <td class="text-xs-center">{{ props.item.record }}</td>
         <td class="text-xs-center">{{ props.item.createAt }}</td>
         <td class="justify-center layout px-0">
-<!--          <v-btn icon @click="edit(props.item)">-->
-<!--            <i class="el-icon-edit"/>-->
-<!--          </v-btn>-->
+          <!--          <v-btn icon @click="edit(props.item)">-->
+          <!--            <i class="el-icon-edit"/>-->
+          <!--          </v-btn>-->
           <v-btn icon @click="deleteRecord(props.item)">
             <i class="el-icon-delete"/>
           </v-btn>
@@ -38,7 +38,7 @@
         </v-toolbar>
         <!--对话框的内容，表单-->
         <v-card-text class="px-5" style="height:400px">
-<!--          <user-item @close="closeWindow" :oldItem="oldItem" :isEdit="isEdit"/>-->
+          <!--          <user-item @close="closeWindow" :oldItem="oldItem" :isEdit="isEdit"/>-->
         </v-card-text>
       </v-card>
     </v-dialog>
@@ -95,18 +95,20 @@
         ],
         items: [],
         oldItem: {},
+        user: {},
       }
     },
     methods: {
       getData() {
-        let url = "/encrecord/page";
+        let url = "/encrecord/user/" + this.user.id;
         this.$http.get(url, {
           params: {
             key: this.search, // 搜索条件
             page: this.pagination.page, // 当前页
             rows: this.pagination.rowsPerPage, // 每页大小
             sortBy: this.pagination.sortBy, // 排序字段
-            desc: this.pagination.descending // 是否降序
+            desc: this.pagination.descending, // 是否降序
+            role: this.user.role
           }
         }).then(res => {
           this.items = res.data.items;
@@ -145,6 +147,8 @@
     },
     mounted() {
       this.getData();
+      this.user = JSON.parse(sessionStorage.getItem('user'));
+
     }
   }
 </script>

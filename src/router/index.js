@@ -17,6 +17,7 @@ const router = new Router({
   mode: 'history',
   routes: [
     route("/login", '/Login', "Login"),
+    route("/register", '/Register', "Register"),
     {
       path: '/',
       component: () => import('../pages/Home'),
@@ -26,6 +27,7 @@ const router = new Router({
         route("/encryption/encservice", '/dataencryption/EncryptionService', "EncService"),
         route("/encryption/encstore", '/dataencryption/EncryptionStore', "EncStore"),
         route("/encryption/encrecord", '/dataencryption/EncryptionRecord', "EncRecord"),
+        route("/encryption/secretkey", '/dataencryption/SecretKeyManage', "SecretKey"),
         route("/sysmanage/master", '/sysmanage/node/master', "Master"),
         route("/sysmanage/master2", '/sysmanage/node/master2', "Master2"),
         route("/sysmanage/slave1", '/sysmanage/node/slave1', "Slave1"),
@@ -41,7 +43,7 @@ const router = new Router({
 })
 
 router.beforeEach((to, from, next) => {
-  if (to.path == "/login") {
+  if (to.path == "/login" || to.path == "/register") {
     next();
   } else {
     if (sessionStorage.getItem("user")) {

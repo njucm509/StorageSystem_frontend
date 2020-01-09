@@ -12,7 +12,9 @@
     <el-form-item style="width:100%;">
       <el-button type="primary" style="width:100%;" @click.native.prevent="handleSubmit" :loading="logining">登录
       </el-button>
-      <!-- <el-button @click.native.prevent="handleReset" style="width: 100%;">重置</el-button> -->
+      <router-link to="/register">
+        <el-button  style="width: 100%;">注册</el-button>
+      </router-link>
     </el-form-item>
   </el-form>
 </template>
@@ -44,7 +46,6 @@
             message: '请输入密码',
             trigger: 'blur'
           }
-
           ]
         },
         checked: true

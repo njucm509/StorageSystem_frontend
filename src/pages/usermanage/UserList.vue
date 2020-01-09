@@ -14,6 +14,7 @@
         <td class="text-xs-center">{{ props.item.id }}</td>
         <td class="text-xs-center">{{ props.item.name }}</td>
         <td class="text-xs-center">{{ props.item.account }}</td>
+        <td class="text-xs-center">{{ props.item.role == 1?'管理员':'普通用户' }}</td>
         <td class="text-xs-center">{{ props.item.createAt }}</td>
         <td class="text-xs-center">{{ props.item.updateAt }}</td>
         <td class="justify-center layout px-0">
@@ -76,6 +77,11 @@
           align: 'center',
           sortable: true,
           value: 'account',
+        }, {
+          text: '是否管理员',
+          align: 'center',
+          sortable: true,
+          value: 'role',
         }, {
           text: '创建时间',
           align: 'center',
