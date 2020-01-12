@@ -6,7 +6,7 @@
       <el-input type="text" v-model="registerForm.account" auto-complete="off" placeholder="账号"></el-input>
     </el-form-item>
     <el-form-item prop="pwd">
-      <el-input type="pwd" v-model="registerForm.pwd" auto-complete="off" placeholder="密码"></el-input>
+      <el-input type="password" v-model="registerForm.pwd" auto-complete="off" placeholder="密码"></el-input>
     </el-form-item>
     <el-form-item prop="name">
       <el-input type="text" v-model="registerForm.name" auto-complete="off" placeholder="真实姓名"></el-input>
@@ -14,7 +14,9 @@
     <el-form-item style="width:100%;">
       <el-button type="primary" style="width:100%;" @click.native.prevent="handleSubmit">注册
       </el-button>
-      <!-- <el-button @click.native.prevent="handleReset" style="width: 100%;">重置</el-button> -->
+      <router-link to="/login">
+        <el-button  style="width: 100%;">返回</el-button>
+      </router-link>
     </el-form-item>
   </el-form>
 

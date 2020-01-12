@@ -13,13 +13,12 @@ import 'element-ui/lib/theme-chalk/index.css';
 import echarts from 'echarts'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.min'
-import $ from 'jquery'
 import uploader from 'vue-simple-uploader'
 
 Vue.config.productionTip = false
 
 // 设置主题
-Vue.use(Vuetify, { theme: config.theme})
+Vue.use(Vuetify, {theme: config.theme})
 
 Vue.use(ElementUI)
 Vue.use(uploader)
@@ -30,6 +29,6 @@ Vue.prototype.$echarts = echarts
 new Vue({
   el: '#app',
   router,
-  components: { App },
+  components: {App},
   template: '<App/>'
 })

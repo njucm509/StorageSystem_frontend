@@ -2,6 +2,11 @@
   <v-card>
     <v-card-title>
       <v-btn color="primary" @click="add">新增用户</v-btn>
+      <form enctype="multipart/form-data" action="" id="fileForm">
+        <input type="file" accept=".csv" id="exportUser" @change="exportUser" style="display: none"/>
+      </form>
+      <v-btn @click="multiAdd">批量导入</v-btn>
+      请下载导入模版<a @click="down">user.csv</a>
       <v-spacer/>
       <v-flex xs3>
         <v-text-field label="输入关键字搜索" v-model.lazy="search" append-icon="search" hide-details></v-text-field>
@@ -49,6 +54,8 @@
 
 <script>
   import UserItem from "./UserItem";
+
+  import axios from 'axios'
 
   export default {
     components: {
@@ -122,6 +129,36 @@
         this.isEdit = false;
         this.oldItem = null;
       },
+      multiAdd() {
+        let exportUser = document.getElementById('exportUser');
+        exportUser.click();
+      },
+      exportUser() {
+        let exportUser = document.getElementById('exportUser');
+        let file = exportUser.files[0];
+        console.log(file);
+        let formData = new FormData();
+        formData.append("file", file);
+        axios.post('/user/multi', formData, {
+          headers: {"Content-Type": "multipart/form-data"},
+        }).then(res => {
+          this.getData();
+          this.$message({
+            message: '导入成功!',
+            type: 'success'
+          });
+        });
+      },
+      down() {
+        this.$http.get('/user/down').then(res => {
+          console.log(res);
+          let blob = new Blob([res.data]);
+          let link = document.createElement('a');
+          link.href = URL.createObjectURL(blob);
+          link.download = 'user.csv';
+          link.click();
+        });
+      },
       edit(oldItem) {
         this.isEdit = true;
         this.oldItem = oldItem;
@@ -154,5 +191,5 @@
   }
 </script>
 
-<style>
+<style scoped>
 </style>

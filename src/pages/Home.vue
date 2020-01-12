@@ -8,7 +8,7 @@
           <v-list-tile avatar>
             <v-list-tile-avatar><img src="../assets/logo.png"></v-list-tile-avatar>
             <v-list-tile-content>
-              <v-list-tile-title>{{user.account}}</v-list-tile-title>
+              <v-list-tile-title>{{user.name}}</v-list-tile-title>
             </v-list-tile-content>
           </v-list-tile>
         </v-list>

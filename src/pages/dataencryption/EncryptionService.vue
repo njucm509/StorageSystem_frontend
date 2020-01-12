@@ -60,26 +60,30 @@
         </v-btn>
       </v-stepper-content>
       <v-stepper-content step="2">
+
+        <p v-if="!analyse">正在解析文件...</p>
         <v-card
           class="mb-5"
           color="lighten-1"
-          height="500px"
         >
-          <p v-if="!analyse">正在解析文件...</p>
-          <my-checkbox v-if="analyse" v-for="(info,index) in fileHeaderInfo" :key="index"
-                       :encryption.sync="info.encryption"
-                       :content="info.content"
-                       :defaultEnc.sync="info.defaultEnc" :check="false"></my-checkbox>
+          <el-col>
+            <my-checkbox v-if="analyse" v-for="(info,index) in fileHeaderInfo" :key="index"
+                         :encryption.sync="info.encryption"
+                         :content="info.content"
+                         :defaultEnc.sync="info.defaultEnc" :check="false"></my-checkbox>
+          </el-col>
         </v-card>
         <v-btn
           color="primary"
           @click="e1 = 2"
+          style="margin-top: 20px"
         >
           上一步
         </v-btn>
         <v-btn
           color="primary"
           @click="e1 = 3"
+          style="margin-top: 20px"
         >
           下一步
         </v-btn>
@@ -122,6 +126,8 @@
           height="500px"
         >
           <p v-if="!finalShow">数据正在加密中...</p>
+          <v-spacer/>
+          <v-btn v-if="finalShow" @click="export2csv">导出数据</v-btn>
           <v-data-table v-if="finalShow" :headers="encResHeader" :items="encResItems"
                         class="elevation-1">
             <template slot="items" slot-scope="props">
@@ -152,6 +158,7 @@
     data() {
       return {
         e1: '1',
+        user: '',
         options: {
           target: config.api + '/file/upload',
           testChunks: false
@@ -291,6 +298,27 @@
       detail(value) {
         console.log(value)
       },
+      export2csv() {
+        let info = this.fileHeaderInfo;
+        let header = '';
+        for (let i = 0; i < info.length; i++) {
+          if (info[i].defaultEnc == 1) {
+            header += info[i].content + ' ' + info[i].encryption + ',';
+          } else {
+            header += info[i].content + ' ,';
+          }
+        }
+        let data = '\n';
+        for (let i = 0; i < this.encResItems.length; i++) {
+          data += this.encResItems[i].valueOf();
+          data += '\n';
+        }
+        let link = document.createElement('a');
+        let exportData = new Blob([header + data]);
+        link.href = URL.createObjectURL(exportData);
+        link.download = this.user.name + '_encrypt_data.csv';
+        link.click();
+      },
       test() {
       }
     },
@@ -299,6 +327,7 @@
       // console.log(this.encryption)
       // this.initFile()
       this.refresh();
+      this.user = JSON.parse(sessionStorage.getItem('user'));
     }
   }
 </script>

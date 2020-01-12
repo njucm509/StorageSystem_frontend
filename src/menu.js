@@ -42,6 +42,7 @@ var menus = [
     admin: 1,
     items: [
       {title: "master", path: "/master"},
+      {title: "master2", path: "/master2"},
       {title: "slave1", path: "/slave1"},
       {title: "slave2", path: "/slave2"},
       {title: "slave3", path: "/slave3"},

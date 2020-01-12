@@ -1,16 +1,24 @@
 <template>
   <div id="base">
+    <!--    <v-col cols="12" sm="3" xl="3" lg="3" md="3" xs="3">-->
     <el-input style="display: inline-block;width: 200px" v-model="content" :disabled="true"/>
+    <!--    </v-col>-->
+    <!--    <v-col cols="12" sm="3" xl="3" lg="3" md="3" xs="3">-->
     <el-select style="display: inline-block" v-model="curEncryption" placeholder="请选择加密方式" :disabled="check">
       <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
       </el-option>
     </el-select>
+    <!--    </v-col>-->
+    <!--    <v-col cols="12" sm="3" xl="3" lg="3" md="3" xs="3">-->
+
     <el-select style="display: inline-block" v-model="curDefault" placeholder="是否加密">
       <el-option v-for="item in optionDefault" :key="item.value" :label="item.label" :value="item.value">
       </el-option>
     </el-select>
-    <!--    <el-input style="display: inline-block;width: 200px" v-model="desc" :disabled="true"/>-->
+    <!--    </v-col>-->
+    <!--    <v-col cols="12" sm="3">-->
     <p style="display: inline-block;margin-left: 50px">{{desc}}</p>
+    <!--    </v-col>-->
   </div>
 </template>
 
@@ -49,7 +57,7 @@
         curEncryption: this.encryption,
         curDefault: this.defaultEnc,
         check: false,
-        desc: 'rsa加密',
+        desc: 'RSA加密算法是一种非对称加密算法。',
       }
     },
     props: ['content', 'encryption', 'defaultEnc'],
@@ -60,13 +68,13 @@
       'curEncryption': function (newVal, oldVal) {
         this.$emit("update:encryption", newVal);
         if (newVal == 'rsa') {
-          this.desc = 'rsa加密';
+          this.desc = 'RSA加密算法是一种非对称加密算法。';
         } else if (newVal == 'aes') {
-          this.desc = 'aes加密';
+          this.desc = 'AES加密是密码学中的高级加密标准，又称Rijndael加密法，是美国联邦政府采用的一种区块加密标准。';
         } else if (newVal == 'md5') {
-          this.desc = 'md5加密';
+          this.desc = 'MD5信息摘要算法，一种被广泛使用的密码散列函数，可以产生出一个128位（16字节）的散列值（hash value），用于确保信息传输完整一致。';
         } else {
-          this.desc = 'ecc加密';
+          this.desc = '椭圆加密算法（ECC）是一种公钥加密体制';
         }
       },
       'defaultEnc': function (newVal, oldVal) {
@@ -77,6 +85,7 @@
           this.check = false;
         } else {
           this.check = true;
+          this.desc = '';
         }
         this.$emit("update:defaultEnc", newVal);
       },
