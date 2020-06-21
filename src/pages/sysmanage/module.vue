@@ -518,6 +518,11 @@
     },
     mounted() {
       this.getData()
+      this.cpuLoading = false;
+      this.memLoading = false;
+      this.netLoading = false;
+      this.dirLoading = false;
+
     }
   }
 </script>

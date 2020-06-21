@@ -36,6 +36,10 @@
             label: 'aes加密'
           },
           {
+            value: 'he',
+            label: '同态加密'
+          },
+          {
             value: 'md5',
             label: 'md5加密'
           },
@@ -73,8 +77,10 @@
           this.desc = 'AES加密是密码学中的高级加密标准，又称Rijndael加密法，是美国联邦政府采用的一种区块加密标准。';
         } else if (newVal == 'md5') {
           this.desc = 'MD5信息摘要算法，一种被广泛使用的密码散列函数，可以产生出一个128位（16字节）的散列值（hash value），用于确保信息传输完整一致。';
-        } else {
+        } else if (newVal == 'ecc'){
           this.desc = '椭圆加密算法（ECC）是一种公钥加密体制';
+        } else {
+          this.desc = '同态加密';
         }
       },
       'defaultEnc': function (newVal, oldVal) {

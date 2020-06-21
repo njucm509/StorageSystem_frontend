@@ -3,7 +3,7 @@
     <v-card-title>
       <v-btn color="primary" @click="add">新增用户</v-btn>
       <form enctype="multipart/form-data" action="" id="fileForm">
-        <input type="file" accept=".csv" id="exportUser" @change="exportUser" style="display: none"/>
+        <input type="file" accept=".csv" id="importUser" @change="importUser" style="display: none"/>
       </form>
       <v-btn @click="multiAdd">批量导入</v-btn>
       请下载导入模版<a @click="down">user.csv</a>
@@ -133,7 +133,7 @@
         let exportUser = document.getElementById('exportUser');
         exportUser.click();
       },
-      exportUser() {
+      importUser() {
         let exportUser = document.getElementById('exportUser');
         let file = exportUser.files[0];
         console.log(file);

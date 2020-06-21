@@ -47,7 +47,6 @@
                   </td>
                 </template>
               </v-data-table>
-
             </v-card>
           </v-flex>
         </v-layout>
@@ -60,7 +59,6 @@
         </v-btn>
       </v-stepper-content>
       <v-stepper-content step="2">
-
         <p v-if="!analyse">正在解析文件...</p>
         <v-card
           class="mb-5"
@@ -104,7 +102,6 @@
               <td class="text-xs-center">{{ props.item.defaultEnc==1?'加密':'不加密' }}</td>
             </template>
           </v-data-table>
-
         </v-card>
         <v-btn
           color="primary"
